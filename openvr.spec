@@ -1,3 +1,6 @@
+%define libname %mklibname openvr
+%define devname %mklibname -d openvr
+
 %define so_ver 2_5_1
 Name:           openvr
 Version:        2.5.1
@@ -12,26 +15,26 @@ Patch0:         install-library.patch
 BuildRequires:  cmake
 BuildRequires:  pkgconfig
 
-%package devel
-Summary:        Development files for VR API
-Group:          Development/Libraries/C and C++
-Requires:       libopenvr_api%{so_ver}
-
-%package -n libopenvr_api%{so_ver}
-Summary:        SDK API library
-Group:          System/Libraries
-
 %description
 OpenVR is an API and runtime that allows access to VR hardware from multiple vendors
 without requiring that applications have specific knowledge of the hardware they are
 targeting.
 
-%description devel
+%package -n %{libname}
+Summary:        SDK API library
+Group:          System/Libraries
+
+%description -n %{libname}
 OpenVR is an API and runtime that allows access to VR hardware from multiple vendors
 without requiring that applications have specific knowledge of the hardware they are
 targeting.
 
-%description -n libopenvr_api%{so_ver}
+%package -n %{devname}
+Summary:        Development files for VR API
+Group:          Development/Libraries/C and C++
+Requires:	%{libname} = %{EVRD}
+
+%description -n %{devname}
 OpenVR is an API and runtime that allows access to VR hardware from multiple vendors
 without requiring that applications have specific knowledge of the hardware they are
 targeting.
@@ -48,14 +51,11 @@ rm -rfv ./lib ./bin
 %install
 %make_install -C build
 
-%post -n libopenvr_api%{so_ver} -p /sbin/ldconfig
-%postun -n libopenvr_api%{so_ver} -p /sbin/ldconfig
-
-%files devel
+%files -n %{devname}
 %license LICENSE
 %{_includedir}/openvr
 %{_libdir}/libopenvr_api.so
 %{_datadir}/pkgconfig/openvr.pc
 
-%files -n libopenvr_api%{so_ver}
+%files -n %{libname}
 %{_libdir}/libopenvr_api.so.*
