@@ -10,8 +10,7 @@ Source:         https://github.com/ValveSoftware/openvr/archive/refs/tags/v%{ver
 # PATCH-FIX-OPENSUSE install-library.patch -- Install library in suffixed directory
 Patch0:         install-library.patch
 BuildRequires:  cmake
-BuildRequires:  gcc-c++
-BuildRequires:  pkg-config
+BuildRequires:  pkgconfig
 
 %package devel
 Summary:        Development files for VR API
@@ -45,10 +44,10 @@ rm -rfv ./lib ./bin
 %build
 export CFLAGS="-flto -Wl,-flto"
 %cmake -DBUILD_SHARED=ON -DBUILD_UNIVERSAL=OFF -DUSE_LIBCXX=OFF
-%cmake_build
+%make_build
 
 %install
-%cmake_install
+%make_install -C build
 
 %post -n libopenvr_api%{so_ver} -p /sbin/ldconfig
 %postun -n libopenvr_api%{so_ver} -p /sbin/ldconfig
