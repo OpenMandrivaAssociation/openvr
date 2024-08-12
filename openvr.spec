@@ -42,7 +42,6 @@ targeting.
 rm -rfv ./lib ./bin
 
 %build
-export CFLAGS="-flto -Wl,-flto"
 %cmake -DBUILD_SHARED=ON -DBUILD_UNIVERSAL=OFF -DUSE_LIBCXX=OFF
 %make_build
 
