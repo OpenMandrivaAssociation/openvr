@@ -3,7 +3,7 @@
 
 %define so_ver 2_5_1
 Name:           openvr
-Version:        2.5.1
+Version:        2.12.14
 Release:        1
 Summary:        Virtual reality SDK
 License:        BSD-3-Clause
