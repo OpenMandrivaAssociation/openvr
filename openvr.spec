@@ -13,6 +13,7 @@ Source:         https://github.com/ValveSoftware/openvr/archive/refs/tags/v%{ver
 # PATCH-FIX-OPENSUSE install-library.patch -- Install library in suffixed directory
 Patch0:         install-library.patch
 BuildRequires:  cmake
+BuildRequires:  make
 BuildRequires:  pkgconfig
 
 %description
